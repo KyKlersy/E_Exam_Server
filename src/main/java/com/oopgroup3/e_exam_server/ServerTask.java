@@ -24,12 +24,14 @@ public class ServerTask implements Runnable{
     private Socket client;
     private Executor EXECUTOR;
     private Set SESSIONIDS;
+    private DatabaseManager databaseManager;
     
-    public ServerTask(Socket request, Executor executor, Set sessionids)
+    public ServerTask(Socket request, Executor executor, Set sessionids, DatabaseManager databaseManager)
     {
         this.client = request;
         this.EXECUTOR = executor;
         this.SESSIONIDS = sessionids;
+        this.databaseManager = databaseManager;
     }
     
     @Override
@@ -67,7 +69,13 @@ public class ServerTask implements Runnable{
         
         if(message.getMethod().equals("Login"))
         {
-            EXECUTOR.execute(new LoginTask(message, SESSIONIDS));
+            EXECUTOR.execute(new LoginTask(message, SESSIONIDS, databaseManager));
+        }
+        
+        if(message.getMethod().equals("Register"))
+        {
+            
+            EXECUTOR.execute(new RegisterUserTask(message, SESSIONIDS, databaseManager));
         }
         
         /*

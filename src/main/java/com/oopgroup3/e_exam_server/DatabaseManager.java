@@ -8,7 +8,6 @@ package com.oopgroup3.e_exam_server;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -27,6 +26,13 @@ public class DatabaseManager {
     private boolean databaseInitialized;
     private buildPropertiesFile bPropertiesFile;
     private String propValue;
+    
+    private String DB_URI = null;   
+    private String USER = null;   
+    private String PASS = null;  
+    private Connection connection = null;
+    private String JDBC_DRIVER = null; 
+    
     public DatabaseManager() 
     {
         bPropertiesFile = new buildPropertiesFile();
@@ -44,6 +50,15 @@ public class DatabaseManager {
             try
             {
                 propValue = bPropertiesFile.getPropByKey("DATABASE_INITIALIZED_ONCE");
+                DB_URI = bPropertiesFile.getPropByKey("DB_URI");
+                USER = bPropertiesFile.getPropByKey("USER");
+                PASS = bPropertiesFile.getPropByKey("PASS");
+                JDBC_DRIVER = bPropertiesFile.getPropByKey("JDBC_DRIVER");
+                File userDir = new File(System.getProperty("user.dir"));
+                File databaseFolder = new File(userDir + File.separator + "/server_resources/database");   
+                DB_URI += databaseFolder;
+                System.out.println("Db uri: " + DB_URI);
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -58,18 +73,14 @@ public class DatabaseManager {
         
         buildDatabase(databaseInitialized);
         
+        
     }
     
     private void buildDatabase(boolean databaseInitialized)
     {
-        Connection connection = null;
-        String JDBC_DRIVER = null;           
-        String DB_URI = null;   
-        String USER = null;   
-        String PASS = null;   
-        
         if( databaseInitialized == false )
         { 
+            System.out.println("Database not initialized");
             try 
             {
                 File userDir = new File(System.getProperty("user.dir"));
@@ -124,7 +135,7 @@ public class DatabaseManager {
         
         if(connection != null)
         { 
-           
+            System.err.println("Connection is not null");
             
             try 
             {
@@ -140,7 +151,8 @@ public class DatabaseManager {
                 {
                     System.out.println("DB exists");
                 }
-                
+                statement.close();
+                exists.close();
                 connection.close();
             } catch (Exception e) 
             {
@@ -151,6 +163,22 @@ public class DatabaseManager {
 
     }
 
+    
+    public Connection getConnection()
+        throws SQLException
+    {
+            
+        connection = DriverManager.getConnection(DB_URI, USER, PASS);
+        return this.connection;
+ 
+    }      
+      
+    public void closeConnection()
+        throws SQLException
+    {
+        connection.close();
+    }
+    
     private static void print(Object obj)
     {
        System.out.println(obj.toString());

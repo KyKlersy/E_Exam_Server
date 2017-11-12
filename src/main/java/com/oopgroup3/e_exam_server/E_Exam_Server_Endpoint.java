@@ -38,7 +38,7 @@ public class E_Exam_Server_Endpoint {
             {
                 Socket client = sock.accept();
 
-                ServerTask serverTask = new ServerTask(client, EXECUTOR, SESSIONIDS);
+                ServerTask serverTask = new ServerTask(client, EXECUTOR, SESSIONIDS, databaseManager);
                 
                 EXECUTOR.execute(serverTask);
             }
