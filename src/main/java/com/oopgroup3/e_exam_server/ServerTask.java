@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
@@ -78,26 +79,36 @@ public class ServerTask implements Runnable{
             EXECUTOR.execute(new RegisterUserTask(message, SESSIONIDS, databaseManager));
         }
         
-        /*
-            To Do add more condition tests for handling other method calls
-            each will follow the same pattern.
-        */
-        
-        
-        
-        
-        System.out.println(message.getMethod());
-        
-        /*
-        
-        Simple loop for parsing parameter array.
-        for(String string : message.getParameters())
+        if(message.getMethod().equals("CreateExam"))
         {
-            System.out.println("Parameter: " + string);
+
+            MessageWithJsonObject mwjo = gson.fromJson(jsonString, MessageWithJsonObject.class);
+            
+            mwjo.printExamQuestionList();
+            
         }
         
-        */
+        
+        if(message.getMethod().equals("EditExam"))
+        {        
+            EXECUTOR.execute(new EditExamTask(message));   
+        }
+        
+        if(message.getMethod().equals("DeleteExam"))
+        {
+            
+            
+        }
+        
+        if(message.getMethod().equals("GetExam"))
+        {
+            
+            
+            
+        }
 
+        System.out.println(message.getMethod());
+        
         
     }
     

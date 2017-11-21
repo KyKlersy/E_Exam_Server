@@ -13,4 +13,4 @@ buildNumber.properties
 
 # Ignore generated files from scripts
 /server_resources/
-ClientRequestDriver
+ClientRequestDriver.java

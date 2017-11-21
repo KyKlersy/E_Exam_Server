@@ -20,6 +20,12 @@ public class Message {
     private String Method;
     private String[] parameters;
 
+    public Message(String SessionID, String Method)
+    {
+        this.SessionID = SessionID;
+        this.Method = Method;
+    }
+    
     public Message(String SessionID, String Method, String[] parameters) {
         this.SessionID = SessionID;
         this.Method = Method;
