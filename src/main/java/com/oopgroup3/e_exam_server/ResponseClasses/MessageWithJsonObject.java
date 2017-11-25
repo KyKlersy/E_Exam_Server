@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.oopgroup3.e_exam_server;
+package com.oopgroup3.e_exam_server.ResponseClasses;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class MessageWithJsonObject extends Message{
     {
         for(ExamQuestion examQuestion : examData)
         {
-            System.out.println("Exam Question: " + examQuestion.getQuestion());
+            System.out.println("Question number: "+ examQuestion.getQuestionNumber() +" Exam Question: " + examQuestion.getQuestion());
         }
     }
             

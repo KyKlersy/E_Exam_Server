@@ -1,4 +1,4 @@
-package com.oopgroup3.e_exam_server;
+package com.oopgroup3.e_exam_server.ResponseClasses;
 
 /**
  *

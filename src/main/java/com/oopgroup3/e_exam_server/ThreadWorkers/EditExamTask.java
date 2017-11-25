@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.oopgroup3.e_exam_server;
+package com.oopgroup3.e_exam_server.ThreadWorkers;
 
 import com.google.gson.Gson;
+import com.oopgroup3.e_exam_server.ResponseClasses.ExamQuestion;
+import com.oopgroup3.e_exam_server.ResponseClasses.Message;
+import com.oopgroup3.e_exam_server.ResponseClasses.MessageWithJsonObject;
+import com.oopgroup3.e_exam_server.ResponseClasses.ResponseMessage;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -16,6 +20,8 @@ import java.util.ArrayList;
  *
  * @author Kyle
  */
+
+
 public class EditExamTask implements Runnable{
 
     private Message message;
@@ -49,7 +55,7 @@ public class EditExamTask implements Runnable{
 
             Gson gson = new Gson();
             jsonInnerObject = gson.toJson(mwjoEdit, MessageWithJsonObject.class);
-            responseMessage = new ResponseMessage(sessionID, "ExamReturnData", jsonInnerObject);
+            //responseMessage = new ResponseMessage(sessionID, "ExamReturnData", jsonInnerObject);
             
             jsonResponse = gson.toJson(responseMessage, ResponseMessage.class);
             

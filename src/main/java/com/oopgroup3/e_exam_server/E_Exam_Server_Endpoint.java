@@ -5,6 +5,8 @@
  */
 package com.oopgroup3.e_exam_server;
 
+import com.oopgroup3.e_exam_server.ResponseClasses.MessageManager;
+import com.oopgroup3.e_exam_server.ThreadWorkers.ServerTask;
 import java.io.IOException;
 import java.net.*;
 import java.util.Collections;
@@ -24,11 +26,15 @@ public class E_Exam_Server_Endpoint {
     /* Limited to 8 threads active at any time could be expanded to fit future needs */
     static final ThreadPoolExecutor EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(8);
     
+        
     public static void main(String[] args) 
     {
 
         DatabaseManager databaseManager = new DatabaseManager();
         databaseManager.initDatabase();
+        
+        /* Build the message manager singleton. */
+        MessageManager.getMessageManagerInstance();
         
         try 
         {

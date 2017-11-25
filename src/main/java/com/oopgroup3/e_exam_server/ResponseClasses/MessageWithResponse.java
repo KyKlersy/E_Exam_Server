@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.oopgroup3.e_exam_server;
+package com.oopgroup3.e_exam_server.ResponseClasses;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -12,9 +12,15 @@ import java.util.concurrent.BlockingQueue;
  *
  * @author Kyle
  */
-public class MessageWithResponse extends Message{
+public class MessageWithResponse extends Message implements MessageTypesInterface{
     
     private final BlockingQueue<String> returnedData;
+    
+    public MessageWithResponse()
+    {
+        super();
+        returnedData = new ArrayBlockingQueue<>(1);
+    }
     
     public MessageWithResponse(String SessionID, String Method, String[] parameters) {
         super(SessionID, Method, parameters);

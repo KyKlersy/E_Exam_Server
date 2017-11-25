@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.oopgroup3.e_exam_server;
+package com.oopgroup3.e_exam_server.ThreadWorkers;
 
 import com.google.gson.Gson;
+import com.oopgroup3.e_exam_server.DatabaseManager;
+import com.oopgroup3.e_exam_server.ResponseClasses.Message;
+import com.oopgroup3.e_exam_server.ResponseClasses.MessageWithJsonObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,18 +71,18 @@ public class ServerTask implements Runnable{
         *                                                                  *
         ********************************************************************/
         
-        if(message.getMethod().equals("Login"))
+        if(message.getMethodName().equals("Login"))
         {
             EXECUTOR.execute(new LoginTask(message, SESSIONIDS, databaseManager));
         }
         
-        if(message.getMethod().equals("Register"))
+        if(message.getMethodName().equals("Register"))
         {
             
-            EXECUTOR.execute(new RegisterUserTask(message, SESSIONIDS, databaseManager));
+            //EXECUTOR.execute(new RegisterUserTask(message, SESSIONIDS, databaseManager));
         }
         
-        if(message.getMethod().equals("CreateExam"))
+        if(message.getMethodName().equals("CreateExam"))
         {
 
             MessageWithJsonObject mwjo = gson.fromJson(jsonString, MessageWithJsonObject.class);
@@ -89,25 +92,30 @@ public class ServerTask implements Runnable{
         }
         
         
-        if(message.getMethod().equals("EditExam"))
+        if(message.getMethodName().equals("EditExam"))
         {        
-            EXECUTOR.execute(new EditExamTask(message));   
+            //EXECUTOR.execute(new EditExamTask(message));   
         }
         
-        if(message.getMethod().equals("DeleteExam"))
+        if(message.getMethodName().equals("DeleteExam"))
         {
             
             
         }
         
-        if(message.getMethod().equals("GetExam"))
+        if(message.getMethodName().equals("GetExam"))
         {
             
             
             
+        }
+        
+        if(message.getMethodName().equals("GetTeacherExamList"))
+        {
+            EXECUTOR.execute(new GetListTask(message, databaseManager));       
         }
 
-        System.out.println(message.getMethod());
+        System.out.println(message.getMethodName());
         
         
     }
