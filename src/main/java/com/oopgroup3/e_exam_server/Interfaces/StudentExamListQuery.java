@@ -37,7 +37,7 @@ public class StudentExamListQuery extends ExamListQuery
         
         preparedStatement.close();
         con.close();
-        super.getDatabaseManager().closeConnection();
+        //super.getDatabaseManager().closeConnection();
         
         if(!resultSet.isBeforeFirst())
         {

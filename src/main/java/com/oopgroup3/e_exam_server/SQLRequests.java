@@ -24,7 +24,17 @@ public enum SQLRequests
                         "SELECT STUDENTEXAMS.STUDENTUSERID, STUDENTEXAMS.STUDENTEXAMID, EXAMKEYS.EXAMNAME FROM STUDENTEXAMS\n" +
                         "LEFT JOIN EXAMKEYS ON STUDENTEXAMS.STUDENTEXAMID = EXAMKEYS.EXAMKEYID\n" +
                         "WHERE STUDENTUSERID = ?"
-                       );
+                       ),
+    getExam("SELECT * FROM EXAMQUESTIONS WHERE EXAMID = ?"),
+    createExamKey("INSERT INTO EXAMKEYS(ExamKeyID, ExamTeacherID, ExamName) VALUES(?,?,?)"),
+    insertExamQuestions("INSERT INTO ExamQuestions(ExamQuestionID, ExamID, QuestionType, QuestionNumber, "
+                        + "ExamQuestion, QuestionOne, QuestionTwo, QuestionThree, QuestionFour) VALUES(?,?,?,?,?,?,?,?,?)"),
+    insertTeacherExams("INSERT INTO TeacherExams(ExamNumber,TeacherID,ExamID) VALUES(?,?,?)");
+    
+    /*
+    ExamQuestionID, ExamID, QuestionType, QuestionNumber, ExamQuestion, QuestionOne, QuestionTwo, QuestionThree, QuestionFour
+    */
+    
     
     private final String sqlString;
 

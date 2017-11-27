@@ -5,35 +5,30 @@
  */
 package com.oopgroup3.e_exam_server.ResponseClasses;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Kyle
  */
 public class MessageWithJsonObject extends Message{
     
-    private List<ExamQuestion> examData = new ArrayList<>();
+    private final String jsonObject;
     
-    public MessageWithJsonObject(String SessionID, String Method,ArrayList<ExamQuestion> examQuestions)
+    public MessageWithJsonObject(String SessionID, String Method, String[] parameters ,String jsonObject)
+    {
+        super(SessionID, Method, parameters);
+
+        this.jsonObject = jsonObject;
+    }
+      
+    public MessageWithJsonObject(String SessionID, String Method,String jsonObject)
     {
         super(SessionID, Method);
-        List<ExamQuestion> examQuestionAsList = examQuestions;
-        examData.addAll(examQuestionAsList);
 
+        this.jsonObject = jsonObject;
     }
     
-    public void printExamQuestionList()
+    public String getJsonObject()
     {
-        for(ExamQuestion examQuestion : examData)
-        {
-            System.out.println("Question number: "+ examQuestion.getQuestionNumber() +" Exam Question: " + examQuestion.getQuestion());
-        }
-    }
-            
-    public List<ExamQuestion> getExamQuestions()
-    {
-        return examData;
+        return this.jsonObject;
     }
 }

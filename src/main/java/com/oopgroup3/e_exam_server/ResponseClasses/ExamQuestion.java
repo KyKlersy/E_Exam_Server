@@ -12,6 +12,7 @@ package com.oopgroup3.e_exam_server.ResponseClasses;
 public class ExamQuestion 
 {
     
+    private int ExamQuestionID;
     private int QuestionNumber;
     private int QuestionType;
     private String Question = "";
@@ -35,6 +36,28 @@ public class ExamQuestion
         setQuestion_2(Question_2);
         setQuestion_3(Question_3);
         setQuestion_4(Question_4);
+    }
+    
+    public ExamQuestion(int ExamQuestionID, int QuestionNumber, int QuestionType, String Question, String Question_1, String Question_2, String Question_3, String Question_4)
+    {
+        setExamQuestionID(ExamQuestionID);
+        setQuestionNumber(QuestionNumber);
+        setQuestionType(QuestionType);
+        setQuestion(Question);
+        setQuestion_1(Question_1);
+        setQuestion_2(Question_2);
+        setQuestion_3(Question_3);
+        setQuestion_4(Question_4);
+    }
+    
+    public final void setExamQuestionID(int ExamQuestionID)
+    {
+        this.ExamQuestionID = ExamQuestionID;
+    }   
+    
+    public int getExamQuestionID() 
+    {
+        return ExamQuestionID;
     }
 
     public final void setQuestionNumber(int QuestionNumber)

@@ -74,7 +74,7 @@ public class LoginTask implements Runnable {
             resultSet.close();
             preparedStatement.close();
             connection.close();
-            databaseManager.closeConnection();
+            //databaseManager.closeConnection();
             
         } catch (Exception e) 
         {

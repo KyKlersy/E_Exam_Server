@@ -60,6 +60,7 @@ public class GetListTask implements Runnable
         ResultSet resultSet;
         ExamListQuery examListQuery = null;
         
+        
         if(Integer.parseInt(parameters[1]) == 1)
         {
             examListQuery = new StudentExamListQuery(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]), databaseManager);
@@ -81,7 +82,7 @@ public class GetListTask implements Runnable
         
         try 
         {
-            
+
             resultSet = examListQuery.queryable();
 
             while(resultSet.next())

@@ -21,7 +21,7 @@ import java.sql.Types;
  * @author Kyle
  */
 
-/*
+
 public class RegisterUserTask implements Runnable {
 
     private Message message;
@@ -98,7 +98,7 @@ public class RegisterUserTask implements Runnable {
             
             preparedStatement.close();
             connection.close();
-            databaseManager.closeConnection();
+            //databaseManager.closeConnection();
             
         } catch (Exception e) 
         {
@@ -116,11 +116,13 @@ public class RegisterUserTask implements Runnable {
             
             if(user != null)
             {
-                responseMessage = new ResponseMessage("Success","LoginResponseWorker", jsonInnerObject);
+                responseMessage = new ResponseMessage();
+                responseMessage.constructJsonResponse("Success","LoginResponseWorker", jsonInnerObject);
             }
             else
             {
-                responseMessage = new ResponseMessage("Failed","LoginResponseWorker", jsonInnerObject);
+                responseMessage = new ResponseMessage();
+                responseMessage.constructJsonResponse("Failed","LoginResponseWorker", jsonInnerObject);
             }
             
             jsonResponse = gson.toJson(responseMessage, ResponseMessage.class);
@@ -139,4 +141,4 @@ public class RegisterUserTask implements Runnable {
     }
     
 }
-*/
+

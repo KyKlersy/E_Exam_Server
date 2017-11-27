@@ -8,26 +8,24 @@ package com.oopgroup3.e_exam_server.ThreadWorkers;
 import com.google.gson.Gson;
 import com.oopgroup3.e_exam_server.DatabaseManager;
 import com.oopgroup3.e_exam_server.ResponseClasses.Message;
-import com.oopgroup3.e_exam_server.ResponseClasses.MessageWithJsonObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.concurrent.Executor;
-
+import static com.oopgroup3.e_exam_server.Utils.printDebug.*;
 /**
  *
  * @author Kyle
  */
 public class ServerTask implements Runnable{
 
-    private Socket client;
-    private Executor EXECUTOR;
-    private Set SESSIONIDS;
+    private final Socket client;
+    private final Executor EXECUTOR;
+    private final Set SESSIONIDS;
     private DatabaseManager databaseManager;
     
     public ServerTask(Socket request, Executor executor, Set sessionids, DatabaseManager databaseManager)
@@ -79,22 +77,22 @@ public class ServerTask implements Runnable{
         if(message.getMethodName().equals("Register"))
         {
             
-            //EXECUTOR.execute(new RegisterUserTask(message, SESSIONIDS, databaseManager));
+            EXECUTOR.execute(new RegisterUserTask(message, SESSIONIDS, databaseManager));
         }
         
         if(message.getMethodName().equals("CreateExam"))
         {
 
-            MessageWithJsonObject mwjo = gson.fromJson(jsonString, MessageWithJsonObject.class);
-            
-            mwjo.printExamQuestionList();
-            
+            EXECUTOR.execute(new CreateExamTask(message, databaseManager));
+             
         }
         
         
         if(message.getMethodName().equals("EditExam"))
         {        
-            //EXECUTOR.execute(new EditExamTask(message));   
+          
+            
+            
         }
         
         if(message.getMethodName().equals("DeleteExam"))
@@ -106,16 +104,17 @@ public class ServerTask implements Runnable{
         if(message.getMethodName().equals("GetExam"))
         {
             
-            
+            EXECUTOR.execute(new GetExamTask(message, databaseManager));   
             
         }
         
         if(message.getMethodName().equals("GetTeacherExamList"))
         {
+
             EXECUTOR.execute(new GetListTask(message, databaseManager));       
         }
 
-        System.out.println(message.getMethodName());
+        print(message.getMethodName());
         
         
     }

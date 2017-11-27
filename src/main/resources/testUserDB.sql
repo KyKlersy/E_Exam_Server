@@ -63,6 +63,11 @@ PRIMARY KEY(ExamQuestionID),
 FOREIGN KEY(ExamID) REFERENCES ExamKeys(ExamKeyID)
 );
 
+INSERT INTO EXAMQUESTIONS(ExamQuestionID,ExamID,QuestionType,QuestionNumber,ExamQuestion,QuestionOne,QuestionTwo,QuestionThree,QuestionFour)
+VALUES(NULL,1,1,1,'Is a Duck a Horse','','','',''),
+(NULL,1,2,2,'Is a Tomato a fruit?', 'Yes', 'No', 'Maybe', 'Don''t Know');
+
+
 CREATE TABLE StudentExamSubmittedQuestions(
 SubmittedQuestionID IDENTITY,
 LinkedExamKeyID int,

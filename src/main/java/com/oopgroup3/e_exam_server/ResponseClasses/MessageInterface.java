@@ -14,8 +14,10 @@ public interface MessageInterface
     public void putSessionID(String sessionID);
     public void putMethodName(String methodName);
     public void putParameters(String[] parameters);
+    public void putJsonObject(String jsonObject);
     
     public String getSessionID();
     public String getMethodName();
     public String[] getParameters();
+    public String getJsonObject();
 }

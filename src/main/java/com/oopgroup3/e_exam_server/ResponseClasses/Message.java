@@ -22,6 +22,7 @@ public class Message implements MessageTypesInterface,
     private String SessionID;
     private String Method;
     private String[] parameters;
+    private String jsonObject;
     
     public Message()
     {
@@ -40,6 +41,13 @@ public class Message implements MessageTypesInterface,
         this.parameters = parameters;
     }
 
+    public Message(String SessionID, String Method, String[] parameters, String jsonObject) {
+        this.SessionID = SessionID;
+        this.Method = Method;
+        this.parameters = parameters;
+        this.jsonObject = jsonObject;
+    }
+    
     @Override
     public void send(Socket sock)
         throws IOException
@@ -72,7 +80,12 @@ public class Message implements MessageTypesInterface,
     public void putParameters(String[] parameters) {
         this.parameters = parameters;
     }
-
+    
+    @Override
+    public void putJsonObject(String jsonObject) {
+        this.jsonObject = jsonObject;
+    }
+    
     @Override
     public String getMethodName() {
         return this.Method;
@@ -86,6 +99,11 @@ public class Message implements MessageTypesInterface,
     @Override
     public String[] getParameters() {
         return this.parameters;
+    }
+
+    @Override
+    public String getJsonObject() {
+        return this.jsonObject;
     }
 
 }

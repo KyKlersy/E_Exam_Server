@@ -16,15 +16,14 @@ import java.sql.SQLException;
  *
  * @author Kyle
  */
-public class TeacherExamListQuery extends ExamListQuery
+public class GetExamQueryImplementation extends GetExamQuery
 {
-    private final String queryString;
+    private final String queryString;       
     private PreparedStatement preparedStatement;
-    
-    public TeacherExamListQuery(int userID, int userType, DatabaseManager databaseManager)
-    {
-        super(userID, userType, databaseManager);
-        this.queryString = SQLRequests.getTeacherExamList.getSQLStatement();
+
+    public GetExamQueryImplementation(int userID, int examID, DatabaseManager databaseManager) {
+        super(userID, examID, databaseManager);
+        queryString = SQLRequests.getExam.getSQLStatement();
     }
 
     @Override
@@ -33,7 +32,8 @@ public class TeacherExamListQuery extends ExamListQuery
     {
         Connection con = super.getDatabaseManager().getConnection();
         preparedStatement = con.prepareStatement(queryString);
-        preparedStatement.setInt(1,super.getUserID());
+        preparedStatement.setInt(1,super.getExamID());
+        System.out.print(super.getExamID());
         
         ResultSet resultSet = preparedStatement.executeQuery();
         
@@ -44,14 +44,13 @@ public class TeacherExamListQuery extends ExamListQuery
         if(!resultSet.isBeforeFirst())
         {
             /* Case where nothing is returned */
-            return null;
+            return resultSet;
 
         }
         else
         {
             return resultSet;
-        }
-        
+        }        
     }
     
 }

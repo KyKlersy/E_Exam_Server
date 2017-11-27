@@ -58,7 +58,9 @@ public class DatabaseManager {
                 File userDir = new File(System.getProperty("user.dir"));
                 File databaseFolder = new File(userDir + File.separator + "/server_resources/database");   
                 DB_URI += databaseFolder;
+                DB_URI += ";hsqldb.write_delay=false";
                 System.out.println("Db uri: " + DB_URI);
+                
 
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -168,17 +170,16 @@ public class DatabaseManager {
     public Connection getConnection()
         throws SQLException
     {
-            
-        connection = DriverManager.getConnection(DB_URI, USER, PASS);
-        return this.connection;
+
+        return DriverManager.getConnection(DB_URI, USER, PASS);
  
     }      
       
-    public void closeConnection()
+   /* public void closeConnection()
         throws SQLException
     {
         connection.close();
-    }
+    }*/
     
     private static void print(Object obj)
     {
