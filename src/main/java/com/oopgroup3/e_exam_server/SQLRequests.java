@@ -29,7 +29,9 @@ public enum SQLRequests
     createExamKey("INSERT INTO EXAMKEYS(ExamKeyID, ExamTeacherID, ExamName) VALUES(?,?,?)"),
     insertExamQuestions("INSERT INTO ExamQuestions(ExamQuestionID, ExamID, QuestionType, QuestionNumber, "
                         + "ExamQuestion, QuestionOne, QuestionTwo, QuestionThree, QuestionFour) VALUES(?,?,?,?,?,?,?,?,?)"),
-    insertTeacherExams("INSERT INTO TeacherExams(ExamNumber,TeacherID,ExamID) VALUES(?,?,?)");
+    insertTeacherExam("INSERT INTO TeacherExams(ExamNumber,TeacherID,ExamID) VALUES(?,?,?)"),
+    deleteTeacherExam("DELETE FROM TEACHEREXAMS WHERE TEACHERID = ? AND EXAMID = ?");
+    
     
     /*
     ExamQuestionID, ExamID, QuestionType, QuestionNumber, ExamQuestion, QuestionOne, QuestionTwo, QuestionThree, QuestionFour

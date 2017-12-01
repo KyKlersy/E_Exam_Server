@@ -97,7 +97,7 @@ public class ServerTask implements Runnable{
         
         if(message.getMethodName().equals("DeleteExam"))
         {
-            
+            EXECUTOR.execute(new DeleteExamTask(message, databaseManager));
             
         }
         

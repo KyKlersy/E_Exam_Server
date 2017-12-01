@@ -15,7 +15,6 @@ import com.oopgroup3.e_exam_server.ResponseClasses.JsonResponseInterface;
 import com.oopgroup3.e_exam_server.ResponseClasses.Message;
 import com.oopgroup3.e_exam_server.ResponseClasses.MessageManager;
 import com.oopgroup3.e_exam_server.ResponseClasses.MessageTypes;
-import com.oopgroup3.e_exam_server.ResponseClasses.ResponseMessage;
 import com.oopgroup3.e_exam_server.ResponseClasses.SendableInterface;
 import com.oopgroup3.e_exam_server.SQLRequests;
 import static com.oopgroup3.e_exam_server.Utils.printDebug.*;
@@ -37,11 +36,11 @@ import org.hsqldb.types.Types;
 public class CreateExamTask implements Runnable{
 
     private Message message;
-    private ResponseMessage responseMessage;
     private DatabaseManager databaseManager;
     private String eq = "";
-    private Integer newExamKeyID = null;
     private MessageManager messageManager = MessageManager.getMessageManagerInstance();
+    private Integer newExamKeyID = null;
+    
     
     public CreateExamTask(Message message, DatabaseManager databaseManager) {
         this.message = message;
@@ -89,7 +88,7 @@ public class CreateExamTask implements Runnable{
                 //databaseManager.closeConnection();
                 
                 Connection con3 = databaseManager.getConnection();
-                PreparedStatement insertNewTeacherExam = con3.prepareStatement(SQLRequests.insertTeacherExams.getSQLStatement());
+                PreparedStatement insertNewTeacherExam = con3.prepareStatement(SQLRequests.insertTeacherExam.getSQLStatement());
                 insertNewTeacherExam.setNull(1, Types.INTEGER);
                 insertNewTeacherExam.setInt(2, Integer.parseInt(parameters[0]));
                 insertNewTeacherExam.setInt(3, newExamKeyID);
