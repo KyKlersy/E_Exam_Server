@@ -58,7 +58,11 @@ public enum SQLRequests
     
     updateStudentExamData("UPDATE StudentExams SET Grade = ?, ExamTaken = ? WHERE StudentUserID = ? AND StudentExamID = ?"),
     
-    getStudentsExamList("SELECT ");
+    getStudentsExamList("SELECT "),
+    
+    getExamGrades("SELECT GRADE, EXAMNAME FROM STUDENTEXAMS\n" +
+                  "RIGHT JOIN EXAMKEYS ON STUDENTEXAMID = EXAMKEYID\n" +
+                  "WHERE STUDENTUSERID = ?");
    
    
     private final String sqlString;

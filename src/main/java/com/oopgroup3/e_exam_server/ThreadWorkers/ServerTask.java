@@ -125,6 +125,11 @@ public class ServerTask implements Runnable{
             EXECUTOR.execute(new SubmitAndGradeStudentExamTask(message, databaseManager));
         }
         
+        if(message.getMethodName().equals("GetExamGrades"))
+        {
+            EXECUTOR.execute(new GetExamGradesTask(message, databaseManager));
+        }
+        
         print(message.getMethodName());
         
         

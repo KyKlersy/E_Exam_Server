@@ -18,7 +18,7 @@ public class GetStudentsListQuery implements Queryable{
     @Override
     public ResultSet queryable() throws SQLException {
         
-        
+        return null;
         
     }
     

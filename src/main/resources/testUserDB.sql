@@ -91,7 +91,7 @@ FOREIGN KEY(StudentUserID) REFERENCES Users(UserID),
 FOREIGN KEY(StudentExamID) REFERENCES ExamKeys(ExamKeyID)
 );
 
-INSERT INTO StudentExams(SubmitedExamID,StudentUserID,StudentExamID,ExamTaken)
-VALUES(NULL,0,0,1),
-(NULL,0,1,0),
-(NULL,0,2,0);
+INSERT INTO StudentExams(SubmitedExamID,StudentUserID,StudentExamID,ExamTaken,Grade)
+VALUES(NULL,0,0,1,NULL),
+(NULL,0,1,0, .85),
+(NULL,0,2,0,NULL);
