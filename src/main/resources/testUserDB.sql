@@ -76,6 +76,7 @@ SubmittedQuestionNumber int,
 SubmittedAnswerChoice int,
 PRIMARY KEY(SubmittedQuestionID),
 FOREIGN KEY(SubmittedQuestionUser) REFERENCES Users(UserID),
+FOREIGN KEY(SubmittedQuestionNumber) REFERENCES ExamQuestions(ExamQuestionID),
 FOREIGN KEY(LinkedExamKeyID) REFERENCES ExamKeys(ExamKeyID)
 );
 
@@ -91,6 +92,6 @@ FOREIGN KEY(StudentExamID) REFERENCES ExamKeys(ExamKeyID)
 );
 
 INSERT INTO StudentExams(SubmitedExamID,StudentUserID,StudentExamID,ExamTaken)
-VALUES(NULL,0,0,0),
+VALUES(NULL,0,0,1),
 (NULL,0,1,0),
 (NULL,0,2,0);

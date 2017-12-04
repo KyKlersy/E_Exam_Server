@@ -61,14 +61,14 @@ public class GetListTask implements Runnable
         ExamListQuery examListQuery = null;
         
         
-        if(Integer.parseInt(parameters[1]) == 1)
+        if(Integer.parseInt(parameters[1]) == 1)//Student request
         {
             examListQuery = new StudentExamListQuery(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]), databaseManager);
             resultColumnNames[0] = "ExamName";
             resultColumnNames[1] = "StudentExamID";
             
         }
-        else if(Integer.parseInt(parameters[1]) == 2)
+        else if(Integer.parseInt(parameters[1]) == 2)//teacher request
         {
             examListQuery = new TeacherExamListQuery(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]), databaseManager);
             resultColumnNames[0] = "ExamName";

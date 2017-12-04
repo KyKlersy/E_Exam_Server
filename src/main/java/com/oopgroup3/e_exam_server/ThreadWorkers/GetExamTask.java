@@ -22,6 +22,7 @@ import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import static com.oopgroup3.e_exam_server.Utils.printDebug.*;
 
 /**
  *
@@ -65,6 +66,7 @@ public class GetExamTask implements Runnable{
                 {
                     examQuestion.add(
                             new ExamQuestion(
+                                   resultSet.getInt("ExamQuestionID"),
                                    resultSet.getInt("QuestionNumber"), 
                                    resultSet.getInt("QuestionType"),
                                    resultSet.getString("ExamQuestion"), 
@@ -75,10 +77,13 @@ public class GetExamTask implements Runnable{
                             ));
 
                 }
-
-                examQuestion.forEach(q -> {
-                    System.out.println("Q#: " + q.getQuestionNumber() + " Question: " + q.getQuestion());
-                });
+                
+                if(getDebugFlag())
+                {
+                    examQuestion.forEach(q -> {
+                        print("Q#: " + q.getQuestionNumber() + " Question: " + q.getQuestion());
+                    });
+                }
             }
             
         } 
@@ -95,7 +100,7 @@ public class GetExamTask implements Runnable{
         String jsonInnerObject;
         String jsonResponse;
 
-        //MessageWithJsonObject mwjoEdit = new MessageWithJsonObject(sessionID, "ExamReturnData", examQuestion);
+
         AbstractListResponse<ExamQuestion> abstractListResponse = new AbstractListResponse<>();
         abstractListResponse.constuctList(examQuestion);
 
@@ -107,7 +112,7 @@ public class GetExamTask implements Runnable{
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(sendSocket.getOutputStream()));
 
             Gson gson = new Gson();
-            //jsonInnerObject = gson.toJson(mwjoEdit, MessageWithJsonObject.class);
+
             Type type = new TypeToken<AbstractListResponse<ExamQuestion>>(){}.getType();
             jsonInnerObject = gson.toJson(abstractListResponse, type);
             
@@ -120,7 +125,7 @@ public class GetExamTask implements Runnable{
             
             bufferedWriter.close();
             
-            System.out.println("Response Sent");
+            print("Response Sent");
                         
         }
         catch (IOException ioe)

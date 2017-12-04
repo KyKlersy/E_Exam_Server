@@ -72,7 +72,7 @@ public class CreateExamTask implements Runnable{
             PreparedStatement preparedStatement = con.prepareStatement(SQLRequests.createExamKey.getSQLStatement(),Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setNull(1, Types.INTEGER);      
             preparedStatement.setInt(2, Integer.parseInt(parameters[0]));   
-            preparedStatement.setString(3, parameters[1]);
+            preparedStatement.setString(3, parameters[2]);
             
             int rowcount = preparedStatement.executeUpdate();
             
@@ -85,7 +85,6 @@ public class CreateExamTask implements Runnable{
 
                 preparedStatement.close();
                 con.close();
-                //databaseManager.closeConnection();
                 
                 Connection con3 = databaseManager.getConnection();
                 PreparedStatement insertNewTeacherExam = con3.prepareStatement(SQLRequests.insertTeacherExam.getSQLStatement());
@@ -98,6 +97,8 @@ public class CreateExamTask implements Runnable{
                 con3.close();
                 insertNewTeacherExam.close();
                 
+                
+                /* Delete this call as it is a test set for connection to make sure it was relly deleted */
                 Connection con4 = databaseManager.getConnection();
                 PreparedStatement test = con4.prepareStatement("SELECT * FROM TEACHEREXAMS WHERE TEACHERID = 1");
                 ResultSet testSet = test.executeQuery();

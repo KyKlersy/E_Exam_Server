@@ -1,5 +1,7 @@
 package com.oopgroup3.e_exam_server.ResponseClasses;
 
+import java.util.Comparator;
+
 /**
  *
  * Data class used to represent the exam question,
@@ -9,7 +11,7 @@ package com.oopgroup3.e_exam_server.ResponseClasses;
  * @author carlo
  * 
  */
-public class ExamQuestion 
+public class ExamQuestion implements Comparable<ExamQuestion>
 {
     
     private int ExamQuestionID;
@@ -127,5 +129,16 @@ public class ExamQuestion
     public String getQuestion_4()
     {
         return this.Question_4;
+    }
+
+    @Override
+    public int compareTo(ExamQuestion eq) {
+        return Comparator.comparing(ExamQuestion::getQuestionType)
+                .thenComparing(ExamQuestion::getQuestion)
+                .thenComparing(ExamQuestion::getQuestion_1)
+                .thenComparing(ExamQuestion::getQuestion_2)
+                .thenComparing(ExamQuestion::getQuestion_3)
+                .thenComparing(ExamQuestion::getQuestion_4)
+                .compare(this, eq);     
     }
 }

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import static com.oopgroup3.e_exam_server.Utils.printDebug.*;
 
 /**
  *
@@ -33,7 +34,7 @@ public class GetExamQueryImplementation extends GetExamQuery
         Connection con = super.getDatabaseManager().getConnection();
         preparedStatement = con.prepareStatement(queryString);
         preparedStatement.setInt(1,super.getExamID());
-        System.out.print(super.getExamID());
+        print(super.getExamID());
         
         ResultSet resultSet = preparedStatement.executeQuery();
         

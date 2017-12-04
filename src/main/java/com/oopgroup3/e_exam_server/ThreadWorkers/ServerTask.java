@@ -91,7 +91,7 @@ public class ServerTask implements Runnable{
         if(message.getMethodName().equals("EditExam"))
         {        
           
-            
+            EXECUTOR.execute(new EditExamTask(message, databaseManager));
             
         }
         
@@ -114,6 +114,17 @@ public class ServerTask implements Runnable{
             EXECUTOR.execute(new GetListTask(message, databaseManager));       
         }
 
+        if(message.getMethodName().equals("KeyExam"))
+        {
+            EXECUTOR.execute(new KeyExamTask(message, databaseManager));
+            
+        }
+        
+        if(message.getMethodName().equals("SubmitStudentExam"))
+        {
+            EXECUTOR.execute(new SubmitAndGradeStudentExamTask(message, databaseManager));
+        }
+        
         print(message.getMethodName());
         
         

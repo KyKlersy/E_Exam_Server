@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.oopgroup3.e_exam_server.DatabaseManager;
 import com.oopgroup3.e_exam_server.ResponseClasses.Message;
 import com.oopgroup3.e_exam_server.ResponseClasses.ResponseMessage;
-import com.oopgroup3.e_exam_server.ResponseClasses.User;
+import com.oopgroup3.e_exam_server.ResponseClasses.UserData;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -45,7 +45,7 @@ public class RegisterUserTask implements Runnable {
         String jsonInnerObject;
         UUID uuid = UUID.randomUUID();
         SESSIONID.add(uuid.toString());
-        User user = null;        
+        UserData user = null;        
         PreparedStatement preparedStatement;
         System.out.println("Size of received message params: " + recievedMessageParameters.length + recievedMessageParameters[0]);
         try {
@@ -84,7 +84,7 @@ public class RegisterUserTask implements Runnable {
                 }
                 if(userIDKey != null)
                 {
-                    user = new User(uuid.toString(), Integer.parseInt(recievedMessageParameters[2]), userIDKey, recievedMessageParameters[1]);
+                    user = new UserData(uuid.toString(), Integer.parseInt(recievedMessageParameters[2]), userIDKey, recievedMessageParameters[1]);
                 }
                 else
                 {
@@ -112,7 +112,7 @@ public class RegisterUserTask implements Runnable {
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(sendSocket.getOutputStream()));
 
             Gson gson = new Gson();
-            jsonInnerObject = gson.toJson(user, User.class);
+            jsonInnerObject = gson.toJson(user, UserData.class);
             
             if(user != null)
             {

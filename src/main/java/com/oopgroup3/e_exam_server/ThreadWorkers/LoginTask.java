@@ -6,13 +6,10 @@ import com.oopgroup3.e_exam_server.ResponseClasses.JsonResponseInterface;
 import com.oopgroup3.e_exam_server.ResponseClasses.Message;
 import com.oopgroup3.e_exam_server.ResponseClasses.MessageManager;
 import com.oopgroup3.e_exam_server.ResponseClasses.MessageTypes;
-import com.oopgroup3.e_exam_server.ResponseClasses.ResponseMessage;
 import com.oopgroup3.e_exam_server.ResponseClasses.SendableInterface;
-import com.oopgroup3.e_exam_server.ResponseClasses.User;
+import com.oopgroup3.e_exam_server.ResponseClasses.UserData;
 import com.oopgroup3.e_exam_server.SQLRequests;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,7 +42,7 @@ public class LoginTask implements Runnable {
         String jsonInnerObject;
         UUID uuid = UUID.randomUUID();
         SESSIONID.add(uuid.toString());
-        User user = null;        
+        UserData user = null;        
         PreparedStatement preparedStatement;
         System.out.println("Size of received message params: " + recievedMessageParameters.length +" "+ recievedMessageParameters[0]);
         try {
@@ -65,7 +62,7 @@ public class LoginTask implements Runnable {
             else
             {
                 resultSet.next();
-                user = new User(uuid.toString(), resultSet.getInt("ACCOUNTTYPE"), resultSet.getInt("USERID"), resultSet.getString("USERNAME"));
+                user = new UserData(uuid.toString(), resultSet.getInt("ACCOUNTTYPE"), resultSet.getInt("USERID"), resultSet.getString("USERNAME"));
             }
             //resultSet.next();
              
@@ -86,7 +83,7 @@ public class LoginTask implements Runnable {
             JsonResponseInterface jsonResponse = (JsonResponseInterface) messageManager.getMessage(MessageTypes.ResponseMessage);
             
             Gson gson = new Gson();
-            jsonInnerObject = gson.toJson(user, User.class);
+            jsonInnerObject = gson.toJson(user, UserData.class);
             
             if(user != null)
             {
