@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server.Interfaces;
 
 import com.oopgroup3.e_exam_server.DatabaseManager;
@@ -12,7 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+/**
+ *
+ * This sql class is used to get the list of exams that students have
+ * avaliable to them.
+ * @author Kyle
+ */
 public class StudentExamListQuery extends ExamListQuery 
 {
     private final String queryString;       
@@ -37,8 +37,7 @@ public class StudentExamListQuery extends ExamListQuery
         
         preparedStatement.close();
         con.close();
-        //super.getDatabaseManager().closeConnection();
-        
+
         if(!resultSet.isBeforeFirst())
         {
             /* Case where nothing is returned */

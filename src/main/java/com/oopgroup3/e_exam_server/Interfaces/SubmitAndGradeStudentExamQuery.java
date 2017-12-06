@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server.Interfaces;
 
 import com.oopgroup3.e_exam_server.DatabaseManager;
@@ -16,7 +11,9 @@ import java.util.List;
 import org.hsqldb.types.Types;
 
 /**
- *
+ * This sql class handles submission of an exam by the student,
+ * as well as grading the exam based on the exam key and storing the
+ * students exam grade.
  * @author Kyle
  */
 public class SubmitAndGradeStudentExamQuery 
@@ -37,7 +34,6 @@ public class SubmitAndGradeStudentExamQuery
                     studentExamAnswersList.forEach(answer ->{
                         try 
                         {
-                            //System.out.println("Trying to insert this record: \n" + answer.toString());
                             insertStudentSubmission.setNull(1, Types.INTEGER);
                             insertStudentSubmission.setInt(2, ExamID); System.out.println("ExamID: " + ExamID);
                             insertStudentSubmission.setInt(3, UserID); System.out.println("UserId: " + UserID);

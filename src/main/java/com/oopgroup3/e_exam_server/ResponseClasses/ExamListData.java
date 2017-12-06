@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server.ResponseClasses;
 
 /**
- *
+ * Data object for sending back Exam list data, each instance of this class
+ * represents one exam that is packaged in a Abstractlistresponse to send the
+ * entire list of exams to the client.
  * @author Kyle
  */
 public class ExamListData 

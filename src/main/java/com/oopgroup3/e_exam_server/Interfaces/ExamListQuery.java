@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server.Interfaces;
 
 import com.oopgroup3.e_exam_server.DatabaseManager;
 
 /**
- *
+ * This abstract class is the parent template for classes that need only to query
+ * the database for a resultset and not do any kind of deletion or insertion.
+ * 
+ * Any child class that inherits from this parent must implement the queryable interface
+ * which defines a query that returns a result set.
+ * 
  * @author Kyle
  */
 public abstract class ExamListQuery implements Queryable

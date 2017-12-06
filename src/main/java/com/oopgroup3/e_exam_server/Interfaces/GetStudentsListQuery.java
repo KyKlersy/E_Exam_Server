@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server.Interfaces;
 
 import com.oopgroup3.e_exam_server.DatabaseManager;
@@ -13,12 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
+ * This sql class gets all accounts of type student for the teacher list of
+ * students to be able to pick from.
  * @author Kyle
  */
 public class GetStudentsListQuery implements Queryable{
 
-    private DatabaseManager databaseManager;
+    private final DatabaseManager databaseManager;
     
     public GetStudentsListQuery(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;

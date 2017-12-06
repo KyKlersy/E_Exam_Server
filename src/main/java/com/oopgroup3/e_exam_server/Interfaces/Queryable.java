@@ -9,7 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
+ * Interface Querable used by classes that need only simple requests to the database
+ * that return a result set.
  * @author Kyle
  */
 public interface Queryable

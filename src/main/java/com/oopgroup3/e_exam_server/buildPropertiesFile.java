@@ -9,7 +9,9 @@ import java.io.OutputStream;
 import java.util.Properties;
 
 /**
- *
+ * This class handles creating the properties file if it doesn't exist
+ * as well as the folder structure.
+ * 
  * @author Kyle
  */
 public class buildPropertiesFile {

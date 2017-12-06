@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server.Interfaces;
 
 import com.oopgroup3.e_exam_server.DatabaseManager;
@@ -15,7 +10,8 @@ import java.util.List;
 import org.hsqldb.types.Types;
 
 /**
- *
+ * This query is for deleting / inserting and updating teacher exams.
+ * 
  * @author Kyle
  */
 public class EditExamUpdateQuery 

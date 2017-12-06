@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server.Interfaces;
 
 import com.oopgroup3.e_exam_server.DatabaseManager;
@@ -14,7 +9,8 @@ import java.sql.SQLException;
 import static com.oopgroup3.e_exam_server.Utils.printDebug.*;
 
 /**
- *
+ * Implementation of the abstract parent GetExamQuery
+ * This Sql class handles getting an exam from the database.
  * @author Kyle
  */
 public class GetExamQueryImplementation extends GetExamQuery
@@ -32,9 +28,9 @@ public class GetExamQueryImplementation extends GetExamQuery
         throws SQLException
     {
            
-        try {
-            
-        
+        try 
+        {
+
         Connection con = super.getDatabaseManager().getConnection();
         preparedStatement = con.prepareStatement(queryString);
         preparedStatement.setInt(1,super.getExamID());
@@ -44,8 +40,6 @@ public class GetExamQueryImplementation extends GetExamQuery
         
         preparedStatement.close();
         con.close();
-        //super.getDatabaseManager().closeConnection();
-
 
         return resultSet;     
         }

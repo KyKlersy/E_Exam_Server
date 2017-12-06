@@ -1,18 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server.ResponseClasses;
 
 import com.google.gson.Gson;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.net.Socket;
 
 /**
- *
+ * This is the base class that all other messages inherit from
+ * it implements the message types interface which is being used in a way
+ * that it should not. Any class that inherits from this parent gets that empty
+ * interface allowing them to be cast to messageTypesInterface.
  * @author Kyle
  */
 public class Message implements MessageTypesInterface,

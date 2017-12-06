@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server;
 
 import com.oopgroup3.e_exam_server.ResponseClasses.MessageManager;
@@ -17,7 +12,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 
 /**
- *
+ * This is the main entry point for running the E-Exam server portion of the app
+ * It handles creation of the database using database manager and receives all incoming
+ * requests on socket port 64023, it then passes this to the serverTask runnable
+ * which will further process the received connection.
+ * 
  * @author Kyle
  */
 public class E_Exam_Server_Endpoint {
@@ -42,7 +41,8 @@ public class E_Exam_Server_Endpoint {
             /* now listen for connections */
             while (true)
             {
-                Socket client = sock.accept();
+                Socket client = sock.accept(); 
+                //normally bad practice to have a spin infinite while true, sock.accept blocks untill a connection is recieved
 
                 ServerTask serverTask = new ServerTask(client, EXECUTOR, SESSIONIDS, databaseManager);
                 

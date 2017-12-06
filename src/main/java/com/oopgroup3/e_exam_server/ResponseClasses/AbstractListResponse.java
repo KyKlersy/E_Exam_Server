@@ -1,15 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.oopgroup3.e_exam_server.ResponseClasses;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * This class is part of the messaging classes it allows the server
+ * to respond with an abstract list of type <T> where T is defined
+ * when the message is being constructed.
+ * 
+ * This generic class allows a message to send back any kind of list.
  * @author Kyle
  */
 public class AbstractListResponse <T> implements MessageTypesInterface

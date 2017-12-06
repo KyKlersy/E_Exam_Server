@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server;
 
 import java.io.File;
@@ -10,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +13,13 @@ import org.hsqldb.cmdline.SqlFile;
 import org.hsqldb.cmdline.SqlToolError;
 
 /**
- *
+ * This class is responsable for s setting up the database.
+ * It first attempts to read from the buildPropertiesFile
+ * which exists inside the server_resources folder. If it cant
+ * load this file it creates it using the buildPropertiesFile class.
+ * If the prop file exists it precedes to connect to the using the connection
+ * string from the prop file which will start up hsqldb.
+ * 
  * @author Kyle
  */
 public class DatabaseManager {
@@ -166,7 +166,6 @@ public class DatabaseManager {
 
     }
   
-    
     public Connection getConnection()
         throws SQLException
     {
@@ -175,12 +174,6 @@ public class DatabaseManager {
  
     }      
       
-   /* public void closeConnection()
-        throws SQLException
-    {
-        connection.close();
-    }*/
-    
     private static void print(Object obj)
     {
        System.out.println(obj.toString());

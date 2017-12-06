@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.oopgroup3.e_exam_server.Interfaces;
 
 import com.oopgroup3.e_exam_server.DatabaseManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
- *
+ * Messing around with abstract class that implements an interface this was an
+ * early prototype and its implementation is GetExamQueryImplementation.
+ * 
  * @author Kyle
  */
 public abstract class GetExamQuery implements Queryable
