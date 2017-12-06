@@ -10,7 +10,11 @@ PRIMARY KEY(UserID)
 
 INSERT INTO Users(UserID,Username,Password,AccountType)
 VALUES(NULL,'user', 'user', 1),
-(NULL,'teacher', 'teacher', 2);
+(NULL,'teacher', 'teacher', 2),
+(NULL,'tom', 'tom', 1),
+(NULL,'brady', 'tom', 1),
+(NULL,'jim', 't', 1),
+(NULL,'bob', 't', 1);
 
 CREATE TABLE ExamKeys(
 ExamKeyID IDENTITY,
@@ -43,10 +47,17 @@ CREATE TABLE TeacherAssignments(
 ExamAssignmentID IDENTITY,
 ExamID INT NOT NULL,
 AssignedStudentID INT NOT NULL,
+TeacherAssignerID INT NOT NULL,
 PRIMARY KEY(ExamAssignmentID),
 FOREIGN KEY(ExamID) REFERENCES ExamKeys(ExamKeyID),
-FOREIGN KEY(AssignedStudentID) REFERENCES Users(UserID)
+FOREIGN KEY(AssignedStudentID) REFERENCES Users(UserID),
+FOREIGN KEY(TeacherAssignerID) REFERENCES Users(UserID)
 );
+
+INSERT INTO TeacherAssignments(ExamAssignmentID,ExamID,AssignedStudentID,TeacherAssignerID)
+VALUES(NULL,0,0,1),
+(NULL,1,0,1),
+(NULL,2,0,1);
 
 CREATE TABLE ExamQuestions(
 ExamQuestionID IDENTITY NOT NULL,

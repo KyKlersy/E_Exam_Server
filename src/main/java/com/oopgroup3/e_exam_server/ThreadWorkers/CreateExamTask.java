@@ -133,7 +133,7 @@ public class CreateExamTask implements Runnable{
                             insertExamQuestions.addBatch();
                         } catch (Exception e) 
                         {
-                            
+                            e.printStackTrace();
                         }
                     });
 

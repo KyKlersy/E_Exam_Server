@@ -51,7 +51,7 @@ public class KeyExamTask implements Runnable{
         String[] parameters = message.getParameters();
         
         print("Params recieved: " + Arrays.toString(parameters));
-        print("param 1: " + parameters[0]);
+        print("param 1: " + parameters[1]);
         
         AbstractListDecoder ald = new AbstractListDecoder();
         
@@ -61,11 +61,12 @@ public class KeyExamTask implements Runnable{
         print("List items recived from client to key exam with: ");
         alr.getList().forEach(item ->{
             print(item.toString());
+
         });
         
         try 
         {
-            keyExamUpdateQuery.updateExamKeys(alr.getList(), databaseManager, Integer.parseInt(parameters[0]));
+            keyExamUpdateQuery.updateExamKeys(alr.getList(), databaseManager, Integer.parseInt(parameters[1]));
         } 
         catch (SQLException sqle)
         {

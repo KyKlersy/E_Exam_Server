@@ -16,29 +16,35 @@ import java.sql.SQLException;
  *
  * @author Kyle
  */
-public class GetStudentsListQuery implements Queryable{
+public class GetAssignedStudentListQuery implements Queryable{
 
     private DatabaseManager databaseManager;
-    
-    public GetStudentsListQuery(DatabaseManager databaseManager) {
+    private int teacherid;
+    private int examid;
+
+    public GetAssignedStudentListQuery(DatabaseManager databaseManager, int teacherid, int examid) {
         this.databaseManager = databaseManager;
+        this.teacherid = teacherid;
+        this.examid = examid;
     }
-  
+    
     @Override
     public ResultSet queryable() throws SQLException 
     {
-        ResultSet results;
+        ResultSet resultSet;
+        
         try(Connection con = databaseManager.getConnection())
         {
-            try(PreparedStatement getStudentsList = con.prepareStatement(SQLRequests.getStudentsList.getSQLStatement()))
+            try(PreparedStatement getAssignedStudentsList = con.prepareStatement(SQLRequests.getAssignedStudentsList.getSQLStatement()))
             {
-                results = getStudentsList.executeQuery();
+                getAssignedStudentsList.setInt(1, teacherid);
+                getAssignedStudentsList.setInt(2, examid);
+                resultSet = getAssignedStudentsList.executeQuery();
                 
-            } 
+            }
         }
         
-        return results;
-        
+        return resultSet;
     }
     
 }

@@ -5,15 +5,21 @@
  */
 package com.oopgroup3.e_exam_server.ThreadWorkers;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.oopgroup3.e_exam_server.DatabaseManager;
 import com.oopgroup3.e_exam_server.Interfaces.SubmitAndGradeStudentExamQuery;
 import com.oopgroup3.e_exam_server.ResponseClasses.AbstractListDecoder;
 import com.oopgroup3.e_exam_server.ResponseClasses.AbstractListResponse;
 import com.oopgroup3.e_exam_server.ResponseClasses.ExamAnswer;
+import com.oopgroup3.e_exam_server.ResponseClasses.JsonResponseInterface;
 import com.oopgroup3.e_exam_server.ResponseClasses.Message;
 import com.oopgroup3.e_exam_server.ResponseClasses.MessageManager;
+import com.oopgroup3.e_exam_server.ResponseClasses.MessageTypes;
+import com.oopgroup3.e_exam_server.ResponseClasses.SendableInterface;
 import static com.oopgroup3.e_exam_server.Utils.printDebug.print;
+import java.io.IOException;
+import java.net.Socket;
 import java.sql.SQLException;
 import java.util.Arrays;
 
@@ -70,6 +76,25 @@ public class SubmitAndGradeStudentExamTask implements Runnable
         {
             sqle.printStackTrace();
         }
+        
+        try
+        {
+            JsonResponseInterface jsonResponse = (JsonResponseInterface) messageManager.getMessage(MessageTypes.ResponseMessage);
+            
+            Gson gson = new Gson();
+
+            
+            jsonResponse.constructJsonResponse("Success", "CreateExamResponseWorker", "Success");
+            print(jsonResponse.getStatus());
+            SendableInterface sendable = (SendableInterface) jsonResponse;
+            sendable.send(new Socket("127.0.0.1",64018));
+            
+                        
+        }
+        catch (IOException ioe)
+        {
+            ioe.printStackTrace();
+        }   
         
     }
     

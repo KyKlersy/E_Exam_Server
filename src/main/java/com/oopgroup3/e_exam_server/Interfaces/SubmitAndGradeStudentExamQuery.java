@@ -56,6 +56,17 @@ public class SubmitAndGradeStudentExamQuery
                 }
             }
 
+            try(Connection con2 = dbm.getConnection())
+            {
+                try(PreparedStatement updateExamTaken = con2.prepareStatement(SQLRequests.updateExamTakenStatus.getSQLStatement()))
+                {
+                    updateExamTaken.setInt(1, UserID);
+                    updateExamTaken.setInt(2, ExamID);
+                    
+                    updateExamTaken.execute();
+                }
+            }
+            
         }
     }
     

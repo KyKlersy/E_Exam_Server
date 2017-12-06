@@ -8,6 +8,7 @@ package com.oopgroup3.e_exam_server.Interfaces;
 import com.oopgroup3.e_exam_server.DatabaseManager;
 import com.oopgroup3.e_exam_server.ResponseClasses.ExamAnswer;
 import com.oopgroup3.e_exam_server.SQLRequests;
+import static com.oopgroup3.e_exam_server.Utils.printDebug.print;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -24,6 +25,7 @@ public class KeyExamUpdateQuery
     {
         if(examAnswersList.size() > 0)
         {
+            print("inserting exam key.");
             try(Connection con = dbm.getConnection())
             {
                 try(PreparedStatement updateKeys = con.prepareStatement(SQLRequests.keyExam.getSQLStatement()))

@@ -31,6 +31,10 @@ public class GetExamQueryImplementation extends GetExamQuery
     public ResultSet queryable() 
         throws SQLException
     {
+           
+        try {
+            
+        
         Connection con = super.getDatabaseManager().getConnection();
         preparedStatement = con.prepareStatement(queryString);
         preparedStatement.setInt(1,super.getExamID());
@@ -41,17 +45,16 @@ public class GetExamQueryImplementation extends GetExamQuery
         preparedStatement.close();
         con.close();
         //super.getDatabaseManager().closeConnection();
-        
-        if(!resultSet.isBeforeFirst())
-        {
-            /* Case where nothing is returned */
-            return resultSet;
 
+
+        return resultSet;     
         }
-        else
+        catch (Exception e) 
         {
-            return resultSet;
-        }        
+            e.printStackTrace();
+        }
+        
+        return null;
     }
     
 }

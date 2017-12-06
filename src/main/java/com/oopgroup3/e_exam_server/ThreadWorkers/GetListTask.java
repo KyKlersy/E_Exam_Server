@@ -17,6 +17,7 @@ import com.oopgroup3.e_exam_server.ResponseClasses.MessageManager;
 import com.oopgroup3.e_exam_server.ResponseClasses.MessageTypes;
 import com.oopgroup3.e_exam_server.ResponseClasses.ResponseMessage;
 import com.oopgroup3.e_exam_server.ResponseClasses.ExamListData;
+import static com.oopgroup3.e_exam_server.Utils.printDebug.print;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -60,6 +61,7 @@ public class GetListTask implements Runnable
         ResultSet resultSet;
         ExamListQuery examListQuery = null;
         
+        print(parameters[0]+ " " + parameters[1]);
         
         if(Integer.parseInt(parameters[1]) == 1)//Student request
         {
@@ -85,12 +87,16 @@ public class GetListTask implements Runnable
 
             resultSet = examListQuery.queryable();
 
-            while(resultSet.next())
+            if(resultSet != null)
             {
-                examListData.add(new ExamListData(resultSet.getString(resultColumnNames[0]), resultSet.getInt(resultColumnNames[1])));
-            }
 
-            resultSet.close();
+                while(resultSet.next())
+                {
+                    examListData.add(new ExamListData(resultSet.getString(resultColumnNames[0]), resultSet.getInt(resultColumnNames[1])));
+                }
+                
+                resultSet.close();
+            }
 
             abstractListResponse = (AbstractListResponse <ExamListData>)messageManager.getMessage(MessageTypes.TeacherListResponse);
             abstractListResponse.constuctList(examListData);

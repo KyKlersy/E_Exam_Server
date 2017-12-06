@@ -58,11 +58,24 @@ public enum SQLRequests
     
     updateStudentExamData("UPDATE StudentExams SET Grade = ?, ExamTaken = ? WHERE StudentUserID = ? AND StudentExamID = ?"),
     
-    getStudentsExamList("SELECT "),
+    getStudentsList(" SELECT * FROM USERS WHERE USERS.ACCOUNTTYPE != 2"),
     
+    getAssignedStudentsList("SELECT USERNAME, ASSIGNEDSTUDENTID, EXAMID, EXAMNAME FROM USERS\n" +
+                            "FULL OUTER JOIN TEACHERASSIGNMENTS ON USERS.USERID = TEACHERASSIGNMENTS.ASSIGNEDSTUDENTID\n" +
+                            "LEFT JOIN EXAMKEYS ON EXAMKEYS.EXAMKEYID = TEACHERASSIGNMENTS.EXAMID\n" +
+                            "WHERE(TEACHERASSIGNERID = ? AND EXAMID = ?)"),
+    
+    insertTeacherAssignedExam("INSERT INTO TEACHERASSIGNMENTS(EXAMASSIGNMENTID,EXAMID,ASSIGNEDSTUDENTID,TEACHERASSIGNERID)\n" +
+                              "VALUES(?, ?, ?, ?)"),
+    
+    insertStudentAssignedExam("INSERT INTO StudentExams(SubmitedExamID,StudentUserID,StudentExamID,ExamTaken,Grade)\n" +
+                              "VALUES(?,?,?,?,?)"),
+
     getExamGrades("SELECT GRADE, EXAMNAME FROM STUDENTEXAMS\n" +
                   "RIGHT JOIN EXAMKEYS ON STUDENTEXAMID = EXAMKEYID\n" +
-                  "WHERE STUDENTUSERID = ?");
+                  "WHERE STUDENTUSERID = ?"),
+    
+    updateExamTakenStatus("UPDATE STUDENTEXAMS SET EXAMTAKEN = 1 WHERE StudentUserID = ? AND StudentExamID = ?");
    
    
     private final String sqlString;
